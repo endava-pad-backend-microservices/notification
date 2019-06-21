@@ -1,0 +1,6 @@
+flask
+flask-restplus
+py_eureka_client
+flask-cors
+requests
+pika

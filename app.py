@@ -3,8 +3,8 @@ from flask_restplus import Api,Resource
 from flask_cors import CORS
 import Config as configuration
 
-##Get port and register to eureka
-host,port = configuration.configure()
+##get and do configurations
+config = configuration.configure()
 
 app = Flask(__name__)
 api = Api(app,title="Notification",default="Notification",default_label="")
@@ -15,9 +15,9 @@ app.config["CROS_HEADERS"] = "Content-Type"
 class SwaggerController(Resource):
     @classmethod
     def get(self):
-        url = "http://localhost:"+port+"/"+api.specs_url.split("/")[3]
+        url = "http://localhost:"+config["port"]+"/"+api.specs_url.split("/")[3]
         print(url)
         return redirect(url)
 
 if __name__ == "__main__":
-    app.run(debug=False, host=host, port=port)
+    app.run(debug=False, host=config["host"], port=config["port"])

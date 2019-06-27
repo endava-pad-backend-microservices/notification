@@ -1,5 +1,8 @@
 import logging
 import threading
+import json
+from Utils import MailEvents
+from Service.ConfigurationService import ConfigurationService
 
 class AsyncRabbit:
     def __init__(self,connection,queue):
@@ -7,9 +10,15 @@ class AsyncRabbit:
         self.connection = connection
         self.channel = connection.channel()
         self.queue = queue
-    @classmethod
+
     def callback(self,ch, method, properties, body):
-        logging.warning(body)
+        if self.queue == "user_created":
+            t = threading.Thread(target=MailEvents.mail_userCreated(body))
+            t.daemon = True
+            t.start()
+        if self.queue == "update_config":
+            ConfigurationService().UpdateConfig()
+            logging.warning("Configuration updated!")
 
     def run(self):
         try:

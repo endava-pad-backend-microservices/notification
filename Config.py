@@ -42,8 +42,9 @@ def configure():
     except:
         logging.warning("Rabbit is not fully available. Exiting..")
         raise SystemError()
-
-    return host, port
+    configurations["host"] = host
+    configurations["port"] = port
+    return configurations
 
 def connectEureka(config,port):
      ##Eureka configuration

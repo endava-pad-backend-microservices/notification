@@ -36,5 +36,5 @@ def mail_userCreated(body):
     try:
         MailService().sendMail(destination,asunto,msg)
         logging.info("Mail is sent: "+bodyaux)
-    except:
+    except Exception:
         logging.warning("Fail to send mail: "+bodyaux)

@@ -32,6 +32,6 @@ class ConfigurationService:
                 return self.configuration
         else:
             return self.configuration
-    
+
     def UpdateConfig(self):
         self.configuration = None

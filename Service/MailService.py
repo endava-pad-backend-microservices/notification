@@ -1,6 +1,5 @@
 import smtplib
 import logging
-from os import environ
 from Utils import Constants
 from email.message import EmailMessage
 from Service.ConfigurationService import ConfigurationService
@@ -14,8 +13,8 @@ class MailService:
                 self.port = configurations[Constants.NOTIFICATION][Constants.MAILCONFIG]["port"]
                 self.server = configurations[Constants.NOTIFICATION][Constants.MAILCONFIG]["server"]
                 self.user = configurations[Constants.NOTIFICATION][Constants.MAILCONFIG]["user"]
-                self.password = configurations[Constants.NOTIFICATION][Constants.MAILCONFIG]["password"]                
-        except:
+                self.password = configurations[Constants.NOTIFICATION][Constants.MAILCONFIG]["password"]
+        except Exception:
             logging.warning("Fail to get Configuration for sending mail")
 
     def sendMail(self,destination,subject,message):

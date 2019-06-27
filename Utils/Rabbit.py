@@ -1,6 +1,5 @@
 import logging
 import threading
-import json
 from Utils import MailEvents
 from Service.ConfigurationService import ConfigurationService
 

@@ -1,13 +1,17 @@
 import json
 import logging
 from Service.MailService import MailService
+from Service.ConfigurationService import ConfigurationService
+from Utils import Constants
 
 def mail_userCreated(body):
+    config = ConfigurationService().GetConfig()
     bodyaux = body.decode("utf-8")
     body = json.loads(body.decode("utf-8"))
     destination = body["destination"]
     name = body["user_name"]
-    keyurl = "http://localhost:8080/api/user/validateuser?"+body["key"]
+    keyurl = config[Constants.NOTIFICATION][Constants.ENDPOINTS]["user_created"]
+    keyurl += body["key"]
     asunto = "Please "+name+" validate your email"
     msg = """
     <html>

@@ -1,6 +1,12 @@
 language: python
+
 python:
   - "3.5"
+  
 install:
   - pip install -r requirements.txt
+  
 script: skip
+
+before_script:
+  - export CODACY_PROJECT_TOKEN=9035892cb0a74dcfbea333f7757ac868
